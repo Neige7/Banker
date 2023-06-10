@@ -29,16 +29,18 @@ class All(data: ConfigurationSection) : LootGenerator(data) {
             val player = Bukkit.getPlayer(name)
             // 玩家不在线则停止执行
             if (player != null) {
-                // 执行动作
-                ActionManager.runAction(
-                    player,
-                    lootAction,
-                    hashMapOf(
-                        "damage" to "%.2f".format(damage),
-                        "totalDamage" to "%.2f".format(totalDamage)
-                    ),
-                    null
-                )
+                hashMapOf(
+                    "damage" to "%.2f".format(damage),
+                    "totalDamage" to "%.2f".format(totalDamage)
+                ).also { params ->
+                    // 执行动作
+                    ActionManager.runAction(
+                        player,
+                        lootAction,
+                        params as HashMap<String, Any?>,
+                        params
+                    )
+                }
             }
         }
     }

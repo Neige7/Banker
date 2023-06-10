@@ -42,7 +42,11 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
                     "damage" to "%.2f".format(damageData[name]),
                     "totalDamage" to "%.2f".format(totalDamage)
                 ),
-                null
+                hashMapOf(
+                    "rank" to (index + 1).toString(),
+                    "damage" to "%.2f".format(damageData[name]),
+                    "totalDamage" to "%.2f".format(totalDamage)
+                )
             )
         }
         // 如果存在没领到战利品的人
@@ -55,17 +59,19 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
                     val name = sortedDamageData[index].key
                     // 获取在线玩家, 玩家不在线则停止执行
                     val player = Bukkit.getPlayer(name) ?: continue
-                    // 执行动作
-                    ActionManager.runAction(
-                        player,
-                        guaranteeAction,
-                        hashMapOf(
-                            "rank" to (index + 1).toString(),
-                            "damage" to "%.2f".format(damageData[name]),
-                            "totalDamage" to "%.2f".format(totalDamage)
-                        ),
-                        null
-                    )
+                    hashMapOf(
+                        "rank" to (index + 1).toString(),
+                        "damage" to "%.2f".format(damageData[name]),
+                        "totalDamage" to "%.2f".format(totalDamage)
+                    ).also { params ->
+                        // 执行动作
+                        ActionManager.runAction(
+                            player,
+                            lootAction,
+                            params as HashMap<String, Any?>,
+                            params
+                        )
+                    }
                 }
             }
         }

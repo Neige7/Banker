@@ -30,16 +30,18 @@ class Separate(data: ConfigurationSection) : LootGenerator(data) {
             SamplingUtils.weight(damageData, totalDamage)?.let { name ->
                 // 获取在线玩家, 玩家不在线则停止执行
                 val player = Bukkit.getPlayer(name) ?: return@let
-                // 执行动作
-                ActionManager.runAction(
-                    player,
-                    action,
-                    hashMapOf(
-                        "damage" to "%.2f".format(damageData[name]),
-                        "totalDamage" to "%.2f".format(totalDamage)
-                    ),
-                    null
-                )
+                hashMapOf(
+                    "damage" to "%.2f".format(damageData[name]),
+                    "totalDamage" to "%.2f".format(totalDamage)
+                ).also { params ->
+                    // 执行动作
+                    ActionManager.runAction(
+                        player,
+                        lootAction,
+                        params as HashMap<String, Any?>,
+                        params
+                    )
+                }
             }
         }
     }
