@@ -1,0 +1,12 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+
+pers.neige.banker
+pers.neige.banker.command
+pers.neige.banker.command.subcommand
+pers.neige.banker.hook.mythicmobs
+pers.neige.banker.hook.mythicmobs.impl
+pers.neige.banker.loot
+pers.neige.banker.loot.impl
+pers.neige.banker.manager
+
