@@ -105,8 +105,9 @@ abstract class MythicMobsHooker {
         // 获取伤害数据, 不存在伤害数据就停止操作
         val damageData = data[entity.uniqueId] ?: return
         // 伤害数据排序
-        val sortedDamageData = damageData.entries.toMutableList()
-        sortedDamageData.sortWith { o1, o2 -> o2.value.compareTo(o1.value) }
+        val sortedDamageData = damageData.entries.toMutableList().also {
+            it.sortWith { o1, o2 -> o2.value.compareTo(o1.value) }
+        }
         // 计算总伤害
         var totalDamage = 0.0
         damageData.entries.forEach { entry ->

@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
  * @param configs 战利品ID: 对应的配置
  * @constructor 解析一系列单独的战利品配置, 组合即为怪物对应的战利品配置
  */
-class MobLoot(configs: HashMap<String, ConfigurationSection>) {
+class MobLoot(configs: Map<String, ConfigurationSection>) {
     private val loots = HashMap<String, LootGenerator>()
 
     init {
@@ -27,8 +27,8 @@ class MobLoot(configs: HashMap<String, ConfigurationSection>) {
     }
 
     fun run(
-        damageData: ConcurrentHashMap<String, Double>,
-        sortedDamageData: MutableList<MutableMap.MutableEntry<String, Double>>,
+        damageData: Map<String, Double>,
+        sortedDamageData: List<Map.Entry<String, Double>>,
         totalDamage: Double
     ) {
         loots.forEach { (id, loot) ->

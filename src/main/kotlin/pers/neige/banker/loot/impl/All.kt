@@ -19,8 +19,8 @@ class All(data: ConfigurationSection) : LootGenerator(data) {
     }
 
     override fun run(
-        damageData: ConcurrentHashMap<String, Double>,
-        sortedDamageData: MutableList<MutableMap.MutableEntry<String, Double>>,
+        damageData: Map<String, Double>,
+        sortedDamageData: List<Map.Entry<String, Double>>,
         totalDamage: Double
     ) {
         // 遍历玩家ID

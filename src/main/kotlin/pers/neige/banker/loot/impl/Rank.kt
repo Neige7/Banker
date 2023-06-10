@@ -22,8 +22,8 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
     private val guaranteeAction: Any? = data.get("GuaranteeAction")
 
     override fun run(
-        damageData: ConcurrentHashMap<String, Double>,
-        sortedDamageData: MutableList<MutableMap.MutableEntry<String, Double>>,
+        damageData: Map<String, Double>,
+        sortedDamageData: List<Map.Entry<String, Double>>,
         totalDamage: Double
     ) {
         val length = min((lootAction).size, sortedDamageData.size)

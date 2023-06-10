@@ -21,8 +21,8 @@ abstract class LootGenerator(private val data: ConfigurationSection) {
      * @param totalDamage 总伤害数值
      */
     abstract fun run(
-        damageData: ConcurrentHashMap<String, Double>,
-        sortedDamageData: MutableList<MutableMap.MutableEntry<String, Double>>,
+        damageData: Map<String, Double>,
+        sortedDamageData: List<Map.Entry<String, Double>>,
         totalDamage: Double
     )
 }
