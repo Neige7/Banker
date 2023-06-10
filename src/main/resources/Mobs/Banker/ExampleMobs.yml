@@ -1,0 +1,169 @@
+SeparateExample:
+  Type: ZOMBIE
+  Health: 1
+  Banker:
+    # 当前战利品ID, 只要不重复就可以
+    SeparateExample:
+      # Separate模式下，每一组动作将分别进行随机，分派给不同玩家。比如：
+      # 玩家A造成50%伤害，玩家B造成30%伤害，玩家C造成20%伤害
+      # 根据动作组数进行多轮随机：
+      # 第一组动作：50%交由A玩家执行，30%交由B玩家执行，20%交由C玩家执行
+      # 第二组动作：50%交由A玩家执行，30%交由B玩家执行，20%交由C玩家执行
+      # 第三组动作：50%交由A玩家执行，30%交由B玩家执行，20%交由C玩家执行
+      # ......(同理)
+      LootType: "Separate"
+      # 书写多组NI动作(详见https://neige7.github.io/NeigeItems-Wiki-Docusaurus/%E7%89%A9%E5%93%81/%E7%89%A9%E5%93%81%E5%8A%A8%E4%BD%9C/%E5%8A%A8%E4%BD%9C%E7%B1%BB%E5%9E%8B)
+      LootAction:
+      # 第一组动作
+      - - "console: minecraft:give %player_name% stone 10"
+        - "console: minecraft:give %player_name% diamond 10"
+        - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+      # 第二组动作
+      - - "console: minecraft:give %player_name% stone 64"
+        - "console: minecraft:give %player_name% diamond 64"
+        - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+      # 第三组动作
+      - - condition: perm("test")
+          actions:
+          - "tell: 你拥有test权限"
+        - condition: global.damage >= 1000
+          actions:
+          - "tell: 你造成了超过1000点伤害"
+PackExample:
+  Type: ZOMBIE
+  Health: 1
+  Banker:
+    # 当前战利品ID, 只要不重复就可以
+    PackExample:
+      # Pack模式下，所有动作将作为一个整体进行随机，分派给同一个玩家。比如：
+      # 玩家A造成50%伤害，玩家B造成30%伤害，玩家C造成20%伤害
+      # 根据玩家伤害进行一次随机：
+      # 所有动作：50%交由A玩家执行，30%交由B玩家执行，20%交由C玩家执行
+      LootType: "Pack"
+      # 书写多组NI动作
+      LootAction:
+        # 第一组动作
+        - - "console: minecraft:give %player_name% stone 10"
+          - "console: minecraft:give %player_name% diamond 10"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第二组动作
+        - - "console: minecraft:give %player_name% stone 64"
+          - "console: minecraft:give %player_name% diamond 64"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第三组动作
+        - - condition: perm("test")
+            actions:
+              - "tell: 你拥有test权限"
+          - condition: global.damage >= 1000
+            actions:
+              - "tell: 你造成了超过1000点伤害"
+MultiPackExample:
+  Type: ZOMBIE
+  Health: 1
+  Banker:
+    # 当前战利品ID, 只要不重复就可以
+    MultiPackExample:
+      # MultiPack模式下，所有动作将作为一个整体，将伤害占比作为权重，选取Amount个玩家，进行多次执行。比如：
+      # 玩家A造成40%伤害，玩家B造成30%伤害，玩家C造成20%伤害，玩家D造成10%伤害，Amount为3
+      # 在4人中选取3人执行LootAction
+      # 选取第一人时，4/10选取A玩家，3/10选取B玩家，2/10选取C玩家，1/10选取D玩家
+      # 假如第一人为B，则剩余玩家造成的总伤害从100%变为70%，则：
+      # 选取第二人时，4/7选取A玩家，2/7选取C玩家，1/7选取D玩家
+      # 假如第二人为D，则剩余玩家造成的总伤害从70%变为60%，则：
+      # 选取第三人时，4/6选取A玩家，2/6选取C玩家，1/6选取D玩家
+      # 以上述逻辑，选取Amount个玩家，每个玩家执行一次所有动作
+      LootType: "MultiPack"
+      Amount: 3
+      # 书写多组NI动作
+      LootAction:
+        # 第一组动作
+        - - "console: minecraft:give %player_name% stone 10"
+          - "console: minecraft:give %player_name% diamond 10"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第二组动作
+        - - "console: minecraft:give %player_name% stone 64"
+          - "console: minecraft:give %player_name% diamond 64"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第三组动作
+        - - condition: perm("test")
+            actions:
+              - "tell: 你拥有test权限"
+          - condition: global.damage >= 1000
+            actions:
+              - "tell: 你造成了超过1000点伤害"
+RankExample:
+  Type: ZOMBIE
+  Health: 1
+  Banker:
+    # 当前战利品ID, 只要不重复就可以
+    RankExample:
+      # Rank模式下，将根据玩家排名进行奖励。比如：
+      # 玩家A造成50%伤害，玩家B造成30%伤害，玩家C造成20%伤害
+      # 根据玩家伤害排名进行分配：
+      # 第一组动作：交由A玩家执行
+      # 第二组动作：交由B玩家执行
+      # 第三组动作：交由C玩家执行
+      # 对于未获得奖励的玩家，执行GuaranteeAction，比如：
+      # D玩家造成0.01伤害，排名第四，LootAction只书写了三组动作
+      # 即：D玩家执行GuaranteeAction，收到消息“再接再厉”
+      LootType: "Rank"
+      # 书写多组NI动作
+      LootAction:
+        # 第一组动作
+        - - "console: minecraft:give %player_name% stone 10"
+          - "console: minecraft:give %player_name% diamond 10"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+          - "tell: 你的伤害排名是<rank>"
+          - condition: global.rank <= 5
+            actions:
+              - "tell: 你的伤害达到了前五名"
+        # 第二组动作
+        - - "console: minecraft:give %player_name% stone 64"
+          - "console: minecraft:give %player_name% diamond 64"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+          - "tell: 你的伤害排名是<rank>"
+          - condition: global.rank <= 5
+            actions:
+              - "tell: 你的伤害达到了前五名"
+        # 第三组动作
+        - - condition: perm("test")
+            actions:
+              - "tell: 你拥有test权限"
+          - condition: global.damage >= 1000
+            actions:
+              - "tell: 你造成了超过1000点伤害"
+          - condition: global.rank <= 5
+            actions:
+              - "tell: 你的伤害达到了前五名"
+      GuaranteeAction:
+        - "tell: 再接再厉"
+AllExample:
+  Type: ZOMBIE
+  Health: 1
+  Banker:
+    # 当前战利品ID, 只要不重复就可以
+    AllExample:
+      # All模式下，所有造成伤害的玩家均可获得奖励。比如：
+      # 玩家A造成50%伤害，玩家B造成30%伤害，玩家C造成20%伤害
+      # 所有动作多次重复：A玩家执行一次，B玩家执行一次，C玩家执行一次
+      LootType: "All"
+      # 书写多组NI动作
+      LootAction:
+        # 第一组动作
+        - - "console: minecraft:give %player_name% stone 10"
+          - "console: minecraft:give %player_name% diamond 10"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第二组动作
+        - - "console: minecraft:give %player_name% stone 64"
+          - "console: minecraft:give %player_name% diamond 64"
+          - "tell: 你造成了<damage>点伤害, 全体总伤害<totalDamage>"
+        # 第三组动作
+        - - condition: perm("test")
+            actions:
+              - "tell: 你拥有test权限"
+          - condition: global.damage >= 1000
+            actions:
+              - "tell: 你造成了超过1000点伤害"
+          - condition: global.totalDamage >= 1000
+            actions:
+              - "tell: 所有人共造成了超过1000点伤害"

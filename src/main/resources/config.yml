@@ -1,0 +1,42 @@
+# 是否记录全部MM怪物的伤害统计信息(包含未配置死后执行指令的怪物)
+LogAll: false
+
+Messages:
+  # 怪物死亡提示文本
+  Death: "§f§l§k|§r §c已击杀 {monster}, 讨伐奖励已发放! {damagemessage}"
+  # 伤害统计查看提示
+  Damage: "§f[§c§l查看讨伐报告§f]"
+  # 怪物伤害统计前缀, 设置为 DamagePrefix: [] 代表不发送
+  DamagePrefix:
+    - "§c§m§l----------§f§l/ §c讨伐报告 §f§l/§c§m§l----------"
+    - "§f§m  §f§l|  §7讨伐目标 - {monster}"
+    - "§f§m  §f§l|  §7累计伤害 - {totaldamage}"
+    - "§f§m  §f§l|  §7伤害统计: "
+  # 怪物伤害统计
+  DamageInfo: "  §f§l┕§f§m        §r §7{ranking}. {player}: §a{damage} §8({percentage})"
+  # 怪物伤害统计后缀, 设置为 DamageSuffix: [] 代表不发送
+  DamageSuffix:
+    - ""
+    - "§c§m§l----------------------------"
+  # 战利品类型错误提示
+  LootTypeError: "§e[Banker] §4未知战利品类型: {type}"
+  InvalidPlugin: '§e[Banker] §6未发现前置插件: {plugin}'
+  Reloaded: '§e[Banker] §6重载完毕'
+
+Help:
+  prefix: |-
+    §6======================§eBanker§6======================
+    §6==================[]为必填, ()为选填==================
+  suffix: §6================<< §e{prev} §f{current}§e/§f{total} §e{next} §6>>================
+  amount: 10
+  format: "{command} §7> {description}"
+  prev: 上一页
+  next: 下一页
+  commands:
+    reload:
+      command: §e/banker §freload
+      description: 重新加载config文件
+    help:
+      command: §e/banker §fhelp (页数)
+      description: 查看帮助信息
+

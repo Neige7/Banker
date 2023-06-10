@@ -1,11 +1,8 @@
 package pers.neige.banker
 
 import taboolib.common.platform.Plugin
-import taboolib.common.platform.function.info
+import taboolib.platform.BukkitPlugin
 
 object Banker : Plugin() {
-
-    override fun onEnable() {
-        info("Successfully running ExamplePlugin!")
-    }
+    val plugin by lazy { BukkitPlugin.getInstance() }
 }
