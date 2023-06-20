@@ -165,7 +165,7 @@ public class <span class="typeNameLabel"><a href=LootManager.html>LootManager</a
                                         </tr>
                                         
                                         <tr class="altColor">
-                                            <td class="colFirst"><code>private final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html>Function</a>&lt;ConfigurationSection, <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt;</code></td>
+                                            <td class="colFirst"><code>private final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Constructor.html>Constructor</a>&lt;out <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt;</code></td>
                                             <th class="colSecond" scope="row"><code><a href=LootManager.html#lootGenerators>lootGenerators</a></code></th>
                                             <td class="colLast"></td>
                                         </tr>
@@ -260,13 +260,13 @@ public class <span class="typeNameLabel"><a href=LootManager.html>LootManager</a
                                         <tr id="i1" class="rowColor">
                                             <td class="colFirst"><code>final <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=LootManager.html#addGenerator(String,Function)>addGenerator</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> type, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html>Function</a>&lt;ConfigurationSection, <a href=../loot/LootGenerator.html>LootGenerator</a>&gt; generator) </code>
+                                            <th class="colSecond" scope="row"><code><a href=LootManager.html#addGenerator(String,Class)>addGenerator</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> type, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html>Class</a>&lt;out <a href=../loot/LootGenerator.html>LootGenerator</a>&gt; generator) </code>
                                             </th>
                                             <td class="colLast">添加新的战利品生成器</td>
                                         </tr>
                                         
                                         <tr id="i2" class="altColor">
-                                            <td class="colFirst"><code>final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html>Function</a>&lt;ConfigurationSection, <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt;</code>
+                                            <td class="colFirst"><code>final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Constructor.html>Constructor</a>&lt;out <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt;</code>
                                             </td>
                                             <th class="colSecond" scope="row"><code><a href=LootManager.html#getLootGenerators()>getLootGenerators</a>() </code>
                                             </th>
@@ -341,7 +341,7 @@ public class <span class="typeNameLabel"><a href=LootManager.html>LootManager</a
                                     </li>
                                 </ul>
                                 
-                                <a id="addGenerator(String,Function)">
+                                <a id="addGenerator(String,Class)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -349,7 +349,7 @@ public class <span class="typeNameLabel"><a href=LootManager.html>LootManager</a
                                           >
                                     <li class="blockList">
                                         <h4>addGenerator</h4>
-                                        <pre class="methodSignature"> final <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=LootManager.html#addGenerator(String,Function)>addGenerator</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> type, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html>Function</a>&lt;ConfigurationSection, <a href=../loot/LootGenerator.html>LootGenerator</a>&gt; generator)</pre>
+                                        <pre class="methodSignature"> final <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=LootManager.html#addGenerator(String,Class)>addGenerator</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> type, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html>Class</a>&lt;out <a href=../loot/LootGenerator.html>LootGenerator</a>&gt; generator)</pre>
                                         <div class="block"><p>添加新的战利品生成器</p></div>
                                         
                                         <dl>
@@ -377,7 +377,7 @@ public class <span class="typeNameLabel"><a href=LootManager.html>LootManager</a
                                           >
                                     <li class="blockList">
                                         <h4>getLootGenerators</h4>
-                                        <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html>Function</a>&lt;ConfigurationSection, <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt; <a href=LootManager.html#getLootGenerators()>getLootGenerators</a>()</pre>
+                                        <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html>ConcurrentHashMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Constructor.html>Constructor</a>&lt;out <a href=../loot/LootGenerator.html>LootGenerator</a>&gt;&gt; <a href=LootManager.html#getLootGenerators()>getLootGenerators</a>()</pre>
                                         <div class="block"></div>
                                         
                                         <!-- TODO missing return annotation -->
