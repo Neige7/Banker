@@ -1,8 +1,10 @@
 package pers.neige.banker.manager
 
 import org.bukkit.configuration.ConfigurationSection
+import org.reflections.Reflections
 import pers.neige.banker.loot.LootGenerator
 import pers.neige.banker.loot.impl.*
+import java.lang.reflect.Constructor
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -16,7 +18,7 @@ object LootManager {
     fun parseGenerator(data: ConfigurationSection): LootGenerator? {
         val type = data.getString("LootType")
         val upperType = type?.uppercase(Locale.getDefault())
-        return lootGenerators[upperType]?.apply(data)
+        return lootGenerators[upperType]?.newInstance(data)
     }
 
     /**
@@ -25,27 +27,20 @@ object LootManager {
      * @param type 生成器ID
      * @param generator 一个解析配置并返回生成器的Function
      */
-    fun addGenerator(type: String, generator: java.util.function.Function<ConfigurationSection, LootGenerator>) {
-        lootGenerators[type] = generator
+    fun addGenerator(type: String, generator: Class<out LootGenerator>) {
+        lootGenerators[type] = generator.getDeclaredConstructor(ConfigurationSection::class.java)
     }
 
-    val lootGenerators = ConcurrentHashMap<String, java.util.function.Function<ConfigurationSection, LootGenerator>>()
+    val lootGenerators = ConcurrentHashMap<String, Constructor<out LootGenerator>>()
 
     init {
-        addGenerator("ALL", java.util.function.Function {
-            return@Function All(it)
-        })
-        addGenerator("MULTIPACK", java.util.function.Function {
-            return@Function MultiPack(it)
-        })
-        addGenerator("PACK", java.util.function.Function {
-            return@Function Pack(it)
-        })
-        addGenerator("RANK", java.util.function.Function {
-            return@Function Rank(it)
-        })
-        addGenerator("SEPARATE", java.util.function.Function {
-            return@Function Separate(it)
-        })
+        //获取该路径下所有类
+        val reflections = Reflections("pers.neige.banker.loot.impl")
+        //获取继承了LootGenerator的所有类
+        val classSet: Set<Class<out LootGenerator>> = reflections.getSubTypesOf(LootGenerator::class.java)
+        // 添加生成器
+        for (clazz in classSet) {
+            addGenerator(clazz.simpleName.uppercase(Locale.getDefault()), clazz)
+        }
     }
 }

@@ -3,17 +3,18 @@ package pers.neige.banker.loot.impl
 import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import pers.neige.banker.loot.LootGenerator
+import pers.neige.banker.manager.LootManager
 import pers.neige.neigeitems.manager.ActionManager
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.min
 
 class Rank(data: ConfigurationSection) : LootGenerator(data) {
-    override val type: String = "RANK"
-
     // 获取战利品动作
     private val lootAction = let {
         var lootAction = data.get("LootAction")
-        if (lootAction !is List<*>) {
+        if (lootAction == null) {
+            lootAction = arrayListOf<Any>()
+        } else if (lootAction !is List<*>) {
             lootAction = arrayListOf(lootAction)
         }
         lootAction as List<*>
@@ -24,7 +25,8 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
     override fun run(
         damageData: Map<String, Double>,
         sortedDamageData: List<Map.Entry<String, Double>>,
-        totalDamage: Double
+        totalDamage: Double,
+        params: MutableMap<String, String>?
     ) {
         val length = min((lootAction).size, sortedDamageData.size)
         // 遍历每个战利品配置
@@ -34,20 +36,19 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
             // 获取在线玩家, 玩家不在线则停止执行
             val player = Bukkit.getPlayer(name) ?: continue
             // 执行动作
-            ActionManager.runAction(
-                player,
-                lootAction[index],
-                hashMapOf(
-                    "rank" to (index + 1).toString(),
-                    "damage" to "%.2f".format(damageData[name]),
-                    "totalDamage" to "%.2f".format(totalDamage)
-                ),
-                hashMapOf(
-                    "rank" to (index + 1).toString(),
-                    "damage" to "%.2f".format(damageData[name]),
-                    "totalDamage" to "%.2f".format(totalDamage)
+            (params?.toMutableMap<String, Any?>() ?: mutableMapOf()).also { map ->
+                map["rank"] = (index + 1).toString()
+                map["damage"] = "%.2f".format(damageData[name])
+                map["totalDamage"] = "%.2f".format(totalDamage)
+                map["lootAmount"] = lootAction.size
+                // 执行动作
+                ActionManager.runAction(
+                    player,
+                    lootAction[index],
+                    map,
+                    map
                 )
-            )
+            }
         }
         // 如果存在没领到战利品的人
         if (sortedDamageData.size > lootAction.size) {
@@ -59,17 +60,17 @@ class Rank(data: ConfigurationSection) : LootGenerator(data) {
                     val name = sortedDamageData[index].key
                     // 获取在线玩家, 玩家不在线则停止执行
                     val player = Bukkit.getPlayer(name) ?: continue
-                    hashMapOf(
-                        "rank" to (index + 1).toString(),
-                        "damage" to "%.2f".format(damageData[name]),
-                        "totalDamage" to "%.2f".format(totalDamage)
-                    ).also { params ->
+                    (params?.toMutableMap<String, Any?>() ?: mutableMapOf()).also { map ->
+                        map["rank"] = (index + 1).toString()
+                        map["damage"] = "%.2f".format(damageData[name])
+                        map["totalDamage"] = "%.2f".format(totalDamage)
+                        map["lootAmount"] = lootAction.size
                         // 执行动作
                         ActionManager.runAction(
                             player,
-                            lootAction,
-                            params as HashMap<String, Any?>,
-                            params
+                            lootAction[index],
+                            map,
+                            map
                         )
                     }
                 }

@@ -7,6 +7,8 @@ plugins {
 }
 
 taboolib {
+    relocate("org.reflections","pers.neige.banker.libs.org.reflections")
+
     description {
         contributors {
             name("Neige")
@@ -26,7 +28,7 @@ taboolib {
         "platform-bukkit",
     )
     classifier = null
-    version = "6.0.10-121"
+    version = "6.0.11-13"
 }
 
 configurations{
@@ -49,7 +51,8 @@ dependencies {
     compileOnly(fileTree("libs"))
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
-    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.8")
+    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.10")
+    taboo("org.reflections:reflections:0.10.2")
 }
 
 java {

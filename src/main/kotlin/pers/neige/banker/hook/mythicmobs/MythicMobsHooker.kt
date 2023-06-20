@@ -116,8 +116,24 @@ abstract class MythicMobsHooker {
 
         // 对每个玩家发送伤害统计信息
         sendStatisticsMessage(sortedDamageData, entity.name, totalDamage)
+        // 构建怪物参数
+        val params = mutableMapOf<String, String>().also { map ->
+            if (entity is LivingEntity) {
+                map["mobMaxHealth"] = df2.format(entity.maxHealth)
+            }
+            map["mobId"] = df2.format(mythicId)
+            val location = entity.location
+            map["mobLocationX"] = df2.format(location.x)
+            map["mobLocationY"] = df2.format(location.y)
+            map["mobLocationZ"] = df2.format(location.z)
+            map["mobLocationYaw"] = df2.format(location.yaw)
+            map["mobLocationPitch"] = df2.format(location.pitch)
+            map["mobWorld"] = entity.world.name
+            map["mobName"] = entity.name
+            map["mobCustomName"] = entity.customName
+        }
         // 发送战利品
-        mobConfig?.run(damageData, sortedDamageData, totalDamage)
+        mobConfig?.run(damageData, sortedDamageData, totalDamage, params)
         // 移除对应伤害记录
         data.remove(entity.uniqueId)
     }

@@ -29,10 +29,11 @@ class MobLoot(configs: Map<String, ConfigurationSection>) {
     fun run(
         damageData: Map<String, Double>,
         sortedDamageData: List<Map.Entry<String, Double>>,
-        totalDamage: Double
+        totalDamage: Double,
+        params: MutableMap<String, String>? = null
     ) {
         loots.forEach { (id, loot) ->
-            loot.run(damageData, sortedDamageData, totalDamage)
+            loot.run(damageData, sortedDamageData, totalDamage, params)
         }
     }
 }
