@@ -121,7 +121,7 @@ abstract class MythicMobsHooker {
             if (entity is LivingEntity) {
                 map["mobMaxHealth"] = df2.format(entity.maxHealth)
             }
-            map["mobId"] = df2.format(mythicId)
+            map["mobId"] = mythicId
             val location = entity.location
             map["mobLocationX"] = df2.format(location.x)
             map["mobLocationY"] = df2.format(location.y)
