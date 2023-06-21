@@ -132,7 +132,9 @@ abstract class MythicMobsHooker {
             map["mobLocationPitch"] = df2.format(location.pitch)
             map["mobWorld"] = entity.world.name
             map["mobName"] = entity.name
-            map["mobCustomName"] = entity.customName
+            entity.customName?.let {
+                map["mobCustomName"] = it
+            }
         }
         // 发送战利品
         mobConfig?.run(damageData, sortedDamageData, totalDamage, params)
