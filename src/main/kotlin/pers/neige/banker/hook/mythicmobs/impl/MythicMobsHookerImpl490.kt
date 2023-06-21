@@ -27,6 +27,8 @@ class MythicMobsHookerImpl490 : MythicMobsHooker() {
             null
     }
 
+    private val mobLevelMethod = MythicMobDeathEvent::class.java.getDeclaredMethod("getMobLevel")
+
     private val apiHelper = MythicMobs.inst().apiHelper
 
     override val damageListener = registerBukkitListener(EntityDamageByEntityEvent::class.java, priority = EventPriority.MONITOR) {
@@ -35,10 +37,17 @@ class MythicMobsHookerImpl490 : MythicMobsHooker() {
 
     override val deathListener = registerBukkitListener(MythicMobDeathEvent::class.java, priority = EventPriority.MONITOR) {
         submit(async = true) {
+            val mobLevel = mobLevelMethod.invoke(it).let { level ->
+                if (level is Double) {
+                    level.roundToInt()
+                } else {
+                    level as Int
+                }
+            }
             deathEvent(
                 it.entity,
                 it.mobType.internalName,
-                it.mobLevel
+                mobLevel
             )
         }
     }

@@ -51,7 +51,7 @@ dependencies {
     compileOnly(fileTree("libs"))
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
-    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.10")
+    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.12")
     taboo("org.reflections:reflections:0.10.2")
 }
 
