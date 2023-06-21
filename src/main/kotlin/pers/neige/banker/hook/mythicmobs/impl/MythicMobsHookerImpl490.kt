@@ -8,6 +8,7 @@ import pers.neige.banker.hook.mythicmobs.MythicMobsHooker
 import taboolib.common.platform.event.EventPriority
 import taboolib.common.platform.function.registerBukkitListener
 import taboolib.common.platform.function.submit
+import kotlin.math.roundToInt
 
 /**
  * 4.9.0版本MM挂钩
@@ -34,7 +35,11 @@ class MythicMobsHookerImpl490 : MythicMobsHooker() {
 
     override val deathListener = registerBukkitListener(MythicMobDeathEvent::class.java, priority = EventPriority.MONITOR) {
         submit(async = true) {
-            deathEvent(it.entity, it.mobType.internalName)
+            deathEvent(
+                it.entity,
+                it.mobType.internalName,
+                it.mobLevel
+            )
         }
     }
 

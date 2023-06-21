@@ -34,7 +34,11 @@ class MythicMobsHookerImpl459 : MythicMobsHooker() {
 
     override val deathListener = registerBukkitListener(MythicMobDeathEvent::class.java, priority = EventPriority.MONITOR) {
         submit(async = true) {
-            deathEvent(it.entity, it.mobType.internalName)
+            deathEvent(
+                it.entity,
+                it.mobType.internalName,
+                it.mobLevel
+            )
         }
     }
 

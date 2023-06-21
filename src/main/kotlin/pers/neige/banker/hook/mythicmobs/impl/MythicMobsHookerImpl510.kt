@@ -12,6 +12,7 @@ import taboolib.common.platform.event.EventPriority
 import taboolib.common.platform.function.registerBukkitListener
 import taboolib.common.platform.function.submit
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.math.roundToInt
 
 /**
  * 5.1.0版本MM挂钩
@@ -38,7 +39,11 @@ class MythicMobsHookerImpl510 : MythicMobsHooker() {
 
     override val deathListener = registerBukkitListener(MythicMobDeathEvent::class.java, priority = EventPriority.MONITOR) {
         submit(async = true) {
-            deathEvent(it.entity, it.mobType.internalName)
+            deathEvent(
+                it.entity,
+                it.mobType.internalName,
+                it.mobLevel.roundToInt()
+            )
         }
     }
 

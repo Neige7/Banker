@@ -95,7 +95,8 @@ abstract class MythicMobsHooker {
 
     internal fun deathEvent(
         entity: Entity,
-        mythicId: String
+        mythicId: String,
+        mobLevel: Int
     ) {
         val mobConfig = mobConfigs[mythicId]
 
@@ -122,6 +123,7 @@ abstract class MythicMobsHooker {
                 map["mobMaxHealth"] = df2.format(entity.maxHealth)
             }
             map["mobId"] = mythicId
+            map["mobLevel"] = mobLevel.toString()
             val location = entity.location
             map["mobLocationX"] = df2.format(location.x)
             map["mobLocationY"] = df2.format(location.y)
