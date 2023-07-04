@@ -37,7 +37,7 @@ class MythicMobsHookerImpl459 : MythicMobsHooker() {
             deathEvent(
                 it.entity,
                 it.mobType.internalName,
-                it.mobLevel
+                it.mobLevel.toInt()
             )
         }
     }
