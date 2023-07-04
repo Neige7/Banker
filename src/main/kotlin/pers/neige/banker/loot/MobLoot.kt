@@ -4,8 +4,6 @@ import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import pers.neige.banker.manager.ConfigManager
 import pers.neige.banker.manager.LootManager.parseGenerator
-import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * 怪物战利品配置

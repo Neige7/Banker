@@ -3,7 +3,6 @@ package pers.neige.banker.manager
 import org.bukkit.configuration.ConfigurationSection
 import org.reflections.Reflections
 import pers.neige.banker.loot.LootGenerator
-import pers.neige.banker.loot.impl.*
 import java.lang.reflect.Constructor
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap

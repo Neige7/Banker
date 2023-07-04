@@ -3,10 +3,7 @@ package pers.neige.banker.loot.impl
 import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import pers.neige.banker.loot.LootGenerator
-import pers.neige.banker.manager.LootManager
 import pers.neige.neigeitems.manager.ActionManager
-import pers.neige.neigeitems.utils.ConfigUtils.clone
-import java.util.concurrent.ConcurrentHashMap
 
 class All(data: ConfigurationSection) : LootGenerator(data) {
     // 获取战利品动作

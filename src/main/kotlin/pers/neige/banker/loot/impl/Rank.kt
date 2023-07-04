@@ -3,9 +3,7 @@ package pers.neige.banker.loot.impl
 import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import pers.neige.banker.loot.LootGenerator
-import pers.neige.banker.manager.LootManager
 import pers.neige.neigeitems.manager.ActionManager
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.min
 
 class Rank(data: ConfigurationSection) : LootGenerator(data) {

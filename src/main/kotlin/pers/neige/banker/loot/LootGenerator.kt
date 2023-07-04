@@ -1,7 +1,6 @@
 package pers.neige.banker.loot
 
 import org.bukkit.configuration.ConfigurationSection
-import pers.neige.banker.manager.LootManager
 import java.util.*
 
 /**

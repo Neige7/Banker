@@ -28,7 +28,7 @@ taboolib {
         "platform-bukkit",
     )
     classifier = null
-    version = "6.0.11-13"
+    version = "6.0.11-18"
 }
 
 configurations{
@@ -51,7 +51,7 @@ dependencies {
     compileOnly(fileTree("libs"))
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
-    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.12")
+    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.20")
     taboo("org.reflections:reflections:0.10.2")
 }
 

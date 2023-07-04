@@ -3,15 +3,11 @@ package pers.neige.banker.hook.mythicmobs.impl
 import io.lumine.mythic.bukkit.MythicBukkit
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent
 import org.bukkit.entity.Entity
-import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Projectile
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import pers.neige.banker.hook.mythicmobs.MythicMobsHooker
-import pers.neige.banker.manager.ConfigManager
 import taboolib.common.platform.event.EventPriority
 import taboolib.common.platform.function.registerBukkitListener
 import taboolib.common.platform.function.submit
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.roundToInt
 
 /**
